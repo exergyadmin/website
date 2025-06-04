@@ -21,7 +21,7 @@ const Navbar = () => {
             <Link to="/" className="text-gray-600 hover:text-blue-600">Products</Link>
             <Link to="/services" className="text-gray-600 hover:text-blue-600">Services</Link>
             <Link to="/about" className="text-gray-600 hover:text-blue-600">About</Link>
-                        <Link to="/about" className="text-gray-600 hover:text-blue-600">Learn</Link>
+                        <Link to="/learn" className="text-gray-600 hover:text-blue-600">Learn</Link>
             <Link to="/contact" className="text-gray-600 hover:text-blue-600">Contact</Link>
           </div>
 
@@ -62,7 +62,7 @@ const Navbar = () => {
                 About
               </Link>
               <Link
-                to="/contact"
+                to="/learn"
                 className="block px-3 py-2 text-gray-600 hover:text-blue-600"
                 onClick={() => setIsOpen(false)}
               >
