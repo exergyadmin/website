@@ -1,4 +1,3 @@
-import React from 'react'
 import { Calculator, Clock, ArrowRight, Mail } from 'lucide-react'
 import { MiningRevenueCalculator } from '../components/MiningRevenueCalculator'
 import { Link } from 'react-router-dom'

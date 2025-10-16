@@ -1,18 +1,54 @@
 import { useState, useMemo, FormEvent, KeyboardEvent } from "react";
+import { fetchMiningRevenue } from "../api";
 
 type MiningInputs = {
     miningPower: number | null;
+    responseSampleRate: number;
     startDate: string;
     months: number[];
 }
 
-// what is this doing...?
+// TOOD: do i need to add a sample response rate to the my chart?
+interface RevenueParams {
+    mining_power: number;
+    selected_months: string;
+    response_sample_rate: number;
+    start_date: string;
+}
+
+interface FiatRevenue {
+    date: number; // unix timestamp
+    fiat_revenue: number;
+}
+
+interface SatoshiRevenue {
+    date: number;
+    satoshi_revenue: number;
+}
+
+interface RevenueResult {
+    fiat_revenues: FiatRevenue[];
+    satoshi_revenues: SatoshiRevenue[];
+    hodlers_revenues: FiatRevenue[];
+    total_fiat_revenue: number;
+    total_satoshis: number;
+    current_total_sats_fiat_value: number;
+    current_exchange_rate: number;
+}
+
+interface ChartDataPoint {
+    date: string;
+    fiat_revenue: number;
+    satoshii_revenue: number;
+}
+
+// formatting for input, is there a max/min value?
 function clampInt(value: string): number | null {
     // allow empty => null; otherwise parse non-negative int
     if (value.trim() === "") return null;
     const parsed = parseInt(value.replace(/[^\d]/g, ""), 10);
     return Number.isFinite(parsed) && parsed >= 0 ? parsed : null;
-  }
+}
 
 function isValid(inputs: MiningInputs) {
     return (
@@ -27,22 +63,37 @@ function isValid(inputs: MiningInputs) {
 export function MiningRevenueCalculator() {
     const [inputs, setInputs] = useState<MiningInputs>({
         miningPower: null,
+        responseSampleRate: 4,
         startDate: (new Date()).toString(),
         months: []
-    })
+    });
+
+    const [miningData, setMiningData] = useState<RevenueResult | null>(null);
     
     const [touched, setTouched] = useState<{power?: Boolean, date?: Boolean; months?: boolean}>({});
     const [graphData, setGraphData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('')
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
         if (!isValid(inputs)) return;
         // validate data
         // make api call
-        console.log('fetch the graph data', inputs);
+        // console.log('fetch the graph data', inputs);
+        try {
+            const data = await fetchMiningRevenue({
+                mining_power: inputs.miningPower!,
+                response_sample_rate: inputs.responseSampleRate,
+                start_date: inputs.startDate + 'T00:00:00Z',
+                selected_months: inputs.months.join(',')
+            });
+    
+            console.log('DATAAAA', data)
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     const handleDateChange = (val: string) => {
