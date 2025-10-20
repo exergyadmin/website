@@ -7,6 +7,26 @@ interface RevenueParams {
     start_date: string;
 }
 
+interface FiatRevenue {
+    date: number; // unix timestamp
+    fiat_revenue: number;
+}
+
+interface SatoshiRevenue {
+    date: number;
+    satoshi_revenue: number;
+}
+
+interface RevenueResult {
+    fiat_revenues: FiatRevenue[];
+    satoshi_revenues: SatoshiRevenue[];
+    hodlers_revenues: FiatRevenue[];
+    total_fiat_revenue: number;
+    total_satoshis: number;
+    current_total_sats_fiat_value: number;
+    current_exchange_rate: number;
+}
+
 const API_BASE_URL = "";
 
 export const API_ENDPOINTS = {
@@ -14,7 +34,7 @@ export const API_ENDPOINTS = {
 };
 
 export async function fetchMiningRevenue(params: RevenueParams) {
-    console.log('paramsssss', params)
+    console.log(API_ENDPOINTS)
     return await axios.put(API_ENDPOINTS.calculate_revenue, null, {
         params: {
             mining_power: params.mining_power,
@@ -22,5 +42,5 @@ export async function fetchMiningRevenue(params: RevenueParams) {
             response_sample_rate: params.response_sample_rate,
             start_date: params.start_date
         }
-    })
+    });
 }

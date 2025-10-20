@@ -1,5 +1,6 @@
 import { useState, useMemo, FormEvent, KeyboardEvent } from "react";
 import { fetchMiningRevenue } from "../api";
+import { HistoricMiningRevenueGraph } from "./HistoricMiningRevenueGraph";
 
 type MiningInputs = {
     miningPower: number | null;
@@ -9,6 +10,9 @@ type MiningInputs = {
 }
 
 // TOOD: do i need to add a sample response rate to the my chart?
+// you can ignore
+
+// move types to resuable place (DRY)
 interface RevenueParams {
     mining_power: number;
     selected_months: string;
@@ -79,18 +83,18 @@ export function MiningRevenueCalculator() {
         e.preventDefault();
 
         if (!isValid(inputs)) return;
-        // validate data
-        // make api call
-        // console.log('fetch the graph data', inputs);
+        
         try {
-            const data = await fetchMiningRevenue({
+            const res = await fetchMiningRevenue({
                 mining_power: inputs.miningPower!,
                 response_sample_rate: inputs.responseSampleRate,
                 start_date: inputs.startDate + 'T00:00:00Z',
                 selected_months: inputs.months.join(',')
-            });
+            })
     
-            console.log('DATAAAA', data)
+            if (res.data) {
+                setMiningData(res.data);
+            }
         } catch(error) {
             console.log(error)
         }
@@ -122,14 +126,24 @@ export function MiningRevenueCalculator() {
 
     const canSubmit = isValid(inputs);
 
+
+    const displayMiningData = () => {
+        if (!miningData) return;
+        
+        // const { current_exchange_rate } = miningData;
+        return (
+            <HistoricMiningRevenueGraph {...miningData} />
+        );
+    }
+
     return (
         <>
         {/* TODO: make sure it works with a dark and light mode */}
-            <h1>Mining Revenue Calculators</h1>
+            {/* <h1>Mining Revenue Calculators</h1> */}
 
             {/* calculator */}
             <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto rounded-2xl border border-zinc-800/50 bg-zinc-900/40 backdrop-blur p-6 md:p-8 shadow-xl">
-                <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-6">Mining Calculator</h3>
+                <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-6">Historic Mining Revenue Calculator</h3>
                 <div className="mb-5">
                     <label className="block text-sm font-medium mb-1">
                         Mining Power
@@ -203,6 +217,8 @@ export function MiningRevenueCalculator() {
             </form>
             {/* ghost loader/error message */}
             {/* basic ui of data */}
+
+            {miningData && displayMiningData()}
         </>
     )
 }
