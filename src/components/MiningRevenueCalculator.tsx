@@ -1,6 +1,7 @@
 import { useState, useMemo, FormEvent, KeyboardEvent } from "react";
 import { fetchMiningRevenue } from "../api";
 import { HistoricMiningRevenueGraph } from "./HistoricMiningRevenueGraph";
+import { Spinner } from "./Spinner";
 
 type MiningInputs = {
     miningPower: number | null;
@@ -65,6 +66,7 @@ function isValid(inputs: MiningInputs) {
 
 
 export function MiningRevenueCalculator() {
+    const [loadingChart, setLoadingChart] = useState(false);
     const [inputs, setInputs] = useState<MiningInputs>({
         miningPower: null,
         responseSampleRate: 4,
@@ -76,8 +78,7 @@ export function MiningRevenueCalculator() {
     
     const [touched, setTouched] = useState<{power?: Boolean, date?: Boolean; months?: boolean}>({});
     const [graphData, setGraphData] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('')
+    const [chartError, setChartError] = useState(false);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -85,6 +86,8 @@ export function MiningRevenueCalculator() {
         if (!isValid(inputs)) return;
         
         try {
+            setChartError(false);
+            setLoadingChart(true);
             const res = await fetchMiningRevenue({
                 mining_power: inputs.miningPower!,
                 response_sample_rate: inputs.responseSampleRate,
@@ -96,8 +99,11 @@ export function MiningRevenueCalculator() {
                 setMiningData(res.data);
             }
         } catch(error) {
+            setChartError(true);
             console.log(error)
         }
+
+        setLoadingChart(false);
     }
 
     const handleDateChange = (val: string) => {
@@ -128,9 +134,16 @@ export function MiningRevenueCalculator() {
 
 
     const displayMiningData = () => {
+        if (loadingChart) {
+            return <Spinner label={"Loading Chart"} />
+        }
+
+        if (chartError) {
+            return <h2 className="text-red-600 font-semibold text-center">Error loading chart data, please try again.</h2>
+        }
+
         if (!miningData) return;
-        
-        // const { current_exchange_rate } = miningData;
+
         return (
             <HistoricMiningRevenueGraph {...miningData} />
         );
@@ -217,8 +230,7 @@ export function MiningRevenueCalculator() {
             </form>
             {/* ghost loader/error message */}
             {/* basic ui of data */}
-
-            {miningData && displayMiningData()}
+            {displayMiningData()}
         </>
     )
 }
