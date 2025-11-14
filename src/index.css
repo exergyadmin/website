@@ -4,13 +4,12 @@
 
 /* Import fonts with fallbacks */
 @import url('https://fonts.cdnfonts.com/css/futura-pt');
-@import url('https://fonts.googleapis.com/css2?family=Futura:wght@300;400;500&display=swap');
 @import url('https://fonts.cdnfonts.com/css/valorant');
 
 @layer base {
   /* All Headings - Futura BK BT Book ALL CAPS */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif;
+    font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     letter-spacing: 0.025em;
@@ -24,14 +23,14 @@
   
   /* Body Copy - Futura LT Light Sentence Case */
   body, p, span, div, a, button, input, textarea, li, td, th {
-    font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif;
+    font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif;
     font-weight: 300;
     text-transform: none;
   }
   
   /* Navigation and UI elements - Futura BK BT Book */
   nav, .nav-item, .button-text {
-    font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif;
+    font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     letter-spacing: 0.025em;
@@ -39,7 +38,7 @@
   
   /* Form labels and small text - Futura BK BT Book */
   label, .text-sm, .text-xs {
-    font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif;
+    font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     letter-spacing: 0.025em;
@@ -53,7 +52,7 @@
   
   /* Brand name styling - now using Futura BK BT Book */
   .brand-name {
-    font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif;
+    font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -62,27 +61,27 @@
 
 @layer utilities {
   .font-heading {
-    font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif;
+    font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.05em;
   }
   
   .font-subheading {
-    font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif;
+    font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     letter-spacing: 0.025em;
   }
   
   .font-body {
-    font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif;
+    font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif;
     font-weight: 300;
     text-transform: none;
   }
   
   .font-valorant {
-    font-family: 'Valorant', 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif;
+    font-family: 'Valorant', 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif;
     font-weight: 700;
     letter-spacing: 0.1em;
   }
@@ -112,7 +111,7 @@
   backdrop-filter: blur(8px) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   color: white !important;
-  font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif !important;
+  font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif !important;
   font-weight: 300 !important;
   width: 100% !important;
   box-sizing: border-box !important;
@@ -137,7 +136,7 @@
   font-weight: 600 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.025em !important;
-  font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif !important;
+  font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif !important;
   border: none !important;
   cursor: pointer !important;
   transition: background-color 0.2s ease !important;
@@ -203,7 +202,7 @@
   padding: 1.5rem !important;
   color: white !important;
   text-align: center !important;
-  font-family: 'Futura PT', 'Futura', 'Avenir', 'Helvetica Neue', sans-serif !important;
+  font-family: 'Futura PT', 'Avenir', 'Helvetica Neue', sans-serif !important;
 }
 
 #hubspot-form-container .submitted-message h3 {
@@ -216,4 +215,21 @@
 #hubspot-form-container .submitted-message p {
   color: white !important;
   margin: 0 !important;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }

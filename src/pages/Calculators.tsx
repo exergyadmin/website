@@ -1,5 +1,5 @@
-import React from 'react'
 import { Calculator, Clock, ArrowRight, Mail } from 'lucide-react'
+import { MiningRevenueCalculator } from '../components/MiningRevenueCalculator'
 import { Link } from 'react-router-dom'
 
 const Calculators = () => {
@@ -62,6 +62,8 @@ const Calculators = () => {
               </p>
             </div>
           </div>
+
+          <MiningRevenueCalculator />
 
           {/* Call to Action */}
           <div className="space-y-6">

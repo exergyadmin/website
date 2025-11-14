@@ -111,12 +111,6 @@ const MediaHighlights = () => {
         </div>
       </div>
       
-      {/* Hide scrollbar with CSS */}
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </div>
   )
 }
