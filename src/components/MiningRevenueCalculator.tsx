@@ -155,10 +155,11 @@ export function MiningRevenueCalculator() {
             {/* <h1>Mining Revenue Calculators</h1> */}
 
             {/* calculator */}
-            <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto rounded-2xl border border-zinc-800/50 bg-zinc-900/40 backdrop-blur p-6 md:p-8 shadow-xl">
-                <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-6">Historic Mining Revenue Calculator</h3>
+            <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto bg-surface-50 dark:bg-surface-700 rounded-lg p-6">
+            {/* <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto rounded-2xl border border-zinc-800/50 bg-zinc-900/40 backdrop-blur p-6 md:p-8 shadow-xl"> */}
+                <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-6 text-surface-900 dark:text-surface-100">Historic Mining Revenue Calculator</h3>
                 <div className="mb-5">
-                    <label className="block text-sm font-medium mb-1">
+                    <label className="block text-sm font-medium mb-1 text-surface-600 dark:text-surface-400">
                         Mining Power
                     </label>
                     <input 
@@ -168,7 +169,7 @@ export function MiningRevenueCalculator() {
                         inputMode="numeric"
                         autoComplete="off"
                         placeholder="e.g., 1200"
-                        className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 outline-none focus:border-zinc-400"
+                        className="w-full rounded-lg border border-zinc-800/50 bg-zinc-900/40 px-3 py-2 outline-none focus:border-zinc-400"
                         value={inputs.miningPower ?? ""}
                         onChange={(e) => handlePowerChange(e.target.value)}
                         onBlur={() => setTouched((t) => ({...t, power: true}))} 
@@ -176,14 +177,14 @@ export function MiningRevenueCalculator() {
                 </div>
 
                 <div className="mb-5">
-                    <label htmlFor="startDate" className="block text-sm font-medium mb-1">
+                    <label htmlFor="startDate" className="block text-sm font-medium mb-1 text-surface-600 dark:text-surface-400">
                         Start Date
                     </label>
                     <input 
                         id="startDate"
                         name="startDate"
                         type="date"
-                        className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 outline-none foucs:border-zinc-400"
+                        className="w-full rounded-lg border border-zinc-800/50 bg-zinc-900/40 px-3 py-2 outline-none foucs:border-zinc-400"
                         value={inputs.startDate}
                         onChange={(e) => handleDateChange(e.target.value)}
                         onBlur={() => setTouched((t) => ({...t, date: true}))}
@@ -191,7 +192,7 @@ export function MiningRevenueCalculator() {
                 </div>
 
                 <fieldset className="mb-6">
-                    <legend className="block text-sm font-medium mb-2">Months (select one or more)</legend>
+                    <legend className="block text-sm font-medium mb-2 text-surface-600 dark:text-surface-400">Months (select one or more)</legend>
                     <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
                         {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => {
                             const active = inputs.months.includes(m);
@@ -204,10 +205,10 @@ export function MiningRevenueCalculator() {
                                     onClick={() => toggleMonth(m)}
                                     onKeyDown={(e) => onKeyToggle(e, m)}
                                     className={[
-                                        "rounded-xl border px-3 py-2 text-sm font-medium transition",
+                                        "rounded-xl border px-3 py-2 text-sm font-medium transition border-zinc-800/50 bg-zinc-900/40",
                                         active
-                                            ? "border-zinc-300 bg-zinc-100 text-zinc-900"
-                                            : "border-zinc-700 bg-zing-950 hover:border-zinc-500",
+                                            ? "border-zinc-300 bg-zinc-900 text-zinc-100"
+                                            : "border-zinc-700 bg-zing-400 hover:border-zinc-500",
                                     ].join(" ")}
                                     >
                                     {m}

@@ -46,6 +46,7 @@ export function HistoricMiningRevenueGraph({
     current_exchange_rate
 }: RevenueResult) {
     const formatChartData = (data: RevenueResult): ChartDataPoint[] => {
+      console.log(data)
         return data.fiat_revenues.map((fiat, index) => ({
             date: new Date(fiat.date * 1000).toLocaleDateString(),
             fiatRevenue: fiat.fiat_revenue / 1000,
@@ -69,7 +70,7 @@ export function HistoricMiningRevenueGraph({
     
 
     return (
-        <div className="flex flex-col items-start text-left space-y-2">
+        <div className="flex flex-col items-start text-left space-y-2 mt-2">
             <h2 style={{ color: '#8884d8' }} title="Revenue generated if sats earned from mining was exchanged for fiat">
                 Total Fiat Revenue: ${Math.round(total_fiat_revenue).toLocaleString('en-US')}
             </h2>
